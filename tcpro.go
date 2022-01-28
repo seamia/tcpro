@@ -1,4 +1,3 @@
-// github.com/maxmcd/tcp-proxy
 package main
 
 import (
@@ -17,7 +16,7 @@ type (
 	pipe struct {
 		Name   string `json:"name,omitempty"`
 		From   string `json:"from"` // 10.1.1.55
-		Local  string `json:"thou"` // 10.1.1.1:9999
+		Local  string `json:"thru"` // 10.1.1.1:9999
 		Remote string `json:"to"`   // 10.1.1.96:22
 	}
 )
@@ -66,6 +65,7 @@ func createPipe(p pipe) {
 		os.Exit(111)
 	}
 
+	fmt.Fprintf(os.Stdout, "---------------- (%s) ----------------\n", p.Name)
 	go func() {
 		defer listener.Close()
 
